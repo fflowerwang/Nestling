@@ -101,7 +101,10 @@ def admin_category():
             except:
                 db.session.rollback()
                 db.session.flush()
-            return render_template('admin/category.html',username=username)
+            return redirect(url_for('blog.admin_category1'))
+        lanmus = Lanmu.query.all()
+        return render_template('admin/category.html', lanmus=lanmus, username=username)
+
     else:
         return render_template('admin/index.html')
 
