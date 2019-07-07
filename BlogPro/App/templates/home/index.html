@@ -85,7 +85,8 @@
       </div>
   </aside>
   <main class="r_box">
-    <li><i><a href="/"><img src="/static/home/images/1.jpg"></a></i>
+    <li>
+{#        <i><a href="/"><img src="/static/home/images/1.jpg"></a></i>#}
         {% for art in articles %}
             <h3><a href="/">{{ art.title}}</a></h3>
             <p>{{ art.cont|striptags}}</p><br>

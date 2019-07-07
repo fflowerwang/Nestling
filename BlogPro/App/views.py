@@ -65,21 +65,21 @@ def admin_login():
 
 @blue.route('/admin/logout/')
 def admin_logout():
-    session.pop('username')
+    session.pop('username','')
     res = redirect(url_for('blog.admin_index'))
     return res
 
 #后台主页
 @blue.route('/admin/index/')
 def admin_index():
-    username = session.get('username',default=None)
+    username = session.get('username','')
     return render_template('admin/index.html',username=username)
 
 
 #栏目分类
 @blue.route('/admin/category/')
 def admin_category1():
-    username = session.get('username', default=None)
+    username = session.get('username', '')
     lanmus = Lanmu.query.all()
     return render_template('admin/category.html',lanmus=lanmus,username=username)
 
@@ -113,7 +113,7 @@ def admin_category():
 #修改栏目
 @blue.route('/admin/upcate/',methods=['POST','GET'])
 def update_lm():
-    username = session.get('username', default=None)
+    username = session.get('username', '')
     if username:
         if request.method == 'POST':
             id = request.form.get('id')
@@ -134,7 +134,7 @@ def update_lm():
 #删除栏目
 @blue.route('/admin/deletecate/')
 def admin_delete_category():
-    username = session.get('username', default=None)
+    username = session.get('username', '')
     if username:
         id = request.args.get('cid')
         lanmu = Lanmu.query.get(id)
@@ -152,7 +152,7 @@ def admin_delete_category():
 #文章
 @blue.route('/admin/article/')
 def admin_article():
-    username = session.get('username', default=None)
+    username = session.get('username','')
     articles = Article.query.all()
     return render_template('admin/article.html',articles=articles, username=username)
 
@@ -160,7 +160,7 @@ def admin_article():
 #增加文章
 @blue.route('/admin/addarticle/',methods=['POST','GET'])
 def admin_add_article():
-    username = session.get('username', default=None)
+    username = session.get('username', '')
     if username:
         if request.method == 'POST':
             title = request.form.get('title')
@@ -196,7 +196,7 @@ def admin_add_article():
 #修改文章
 @blue.route('/admin/upart/', methods=["POST", "GET"])
 def admin_update_article():
-    username = session.get('username', default=None)
+    username = session.get('username', '')
     if username:
         if request.method == "POST":
             id = request.form.get('id')
@@ -230,7 +230,7 @@ def admin_update_article():
 #删除文章
 @blue.route('/admin/deleteart/')
 def admin_delete_article():
-    username = session.get('username', default=None)
+    username = session.get('username','')
     if username:
         aid = request.args.get("aid")
         article = Article.query.get(aid)
